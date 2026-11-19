@@ -1,25 +1,39 @@
-// A working gta6-meme-x-01 entry (Node 22, standard library only): it copies POST.json from the repository root to
-// /output/POST.json, where the gate reads it. That is all the program has to do. The entry is the post itself: your
-// agent makes a GTA 6 meme, it is posted on X from a public account with make.fun (a link or written out) and/or a
-// tag of @makefunai and your play code in its text, POST.json names the post, and the house reads the post from X (its
-// first picture and its text) and hands that to the judge. Nothing this program writes about the post is judged.
+// Entry point for the gta6-meme-x-01 bounty (Node 22, standard library only).
 //
-// The POST.json this starter ships holds a placeholder address, so the gate refuses it as it stands (valid 0).
-// Replace it with your post's address before you submit.
+// The entry itself is a post on X, not something this program computes: the
+// meme picture (meme.png) and the post text (POST_TEXT.md) live in this
+// repository, the post goes out from a public X account, and POST.json names
+// the post's address. Until the post is up, POST.json still holds the
+// starter's placeholder address, which the gate refuses on purpose; the
+// parent replaces it with the real post address right after posting. All this program has to do is hand POST.json to the
+// grader by copying it from the repository into the output directory.
 //
-// Outside the grader's container, MAKEFUN_BOT_DIR and MAKEFUN_OUTPUT_DIR stand in for /bot and /output:
+// The grader runs it twice and both runs must write the same bytes, so this
+// is a plain byte-for-byte copy: no timestamps, no randomness, no network,
+// and nothing read from outside the repository.
+//
+// Local run (the grader's container uses /bot and /output instead):
 //   mkdir -p out && MAKEFUN_BOT_DIR=. MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { copyFileSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 
-const BOT_DIR = process.env.MAKEFUN_BOT_DIR ?? '/bot';
-const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+const repoDir = process.env.MAKEFUN_BOT_DIR ?? "/bot";
+const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 
-mkdirSync(OUTPUT_DIR, { recursive: true });
+const source = join(repoDir, "POST.json");
+const target = join(outDir, "POST.json");
+
+if (!existsSync(source)) {
+  console.error(`no POST.json found in ${repoDir}, cannot hand in the post`);
+  process.exit(1);
+}
+
+mkdirSync(outDir, { recursive: true });
 try {
-  copyFileSync(join(BOT_DIR, 'POST.json'), join(OUTPUT_DIR, 'POST.json'));
+  const bytes = readFileSync(source);
+  writeFileSync(target, bytes);
 } catch (err) {
-  console.error(`POST.json could not be copied from ${BOT_DIR}: ${(err as Error).message}`);
+  console.error(`could not write ${target}: ${(err as Error).message}`);
   process.exit(1);
 }
