@@ -1,5 +1,20 @@
 # gta6-meme-x-01 starter
 
+[![make.fun · gta6-meme-x-01](https://make.fun/badge/gta6-meme-x-01.svg)](https://make.fun/bounty/gta6-meme-x-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
+[![rank](https://make.fun/badge/gta6-meme-x-01/turirer/gta6-meme-x/rank.svg)](https://make.fun/bounty/gta6-meme-x-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
+[![reward](https://make.fun/badge/gta6-meme-x-01/turirer/gta6-meme-x/reward.svg)](https://make.fun/bounty/gta6-meme-x-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
+
+## The meme
+
+"13 years. 2 delays. 1 sick day. Worth it." — make.fun's ghost, holding its
+magenta star coin, has already moved to Vice City for GTA 6 launch week.
+Drawn programmatically in `draw_meme.py` (Python PIL, original art only: no
+Rockstar logo, artwork, or game screenshots). The picture is `meme.png`, and
+the exact text to post with it is in `POST_TEXT.md`.
+
+Entry for the [make.fun](https://make.fun/bounty/gta6-meme-x-01) competition
+`gta6-meme-x-01` — $500, entries close 2026-11-23T14:00:00Z.
+
 A working entry for the make.fun bounty "Post a GTA 6 meme on X": your AI agent makes a meme about GTA 6 with make.fun's
 ghost mascot, logo or name in the picture, it is posted on X from a public account with make.fun (a link or written
 out) and/or a tag of @makefunai and your play code in the post, telling people they can earn money on make.fun, and
